@@ -1,10 +1,12 @@
 import './App.css';
 import React, { useEffect } from 'react';
+import HomePage from './pages/HomePage';
+//const HomePage = React.lazy(() => import('./pages/HomePage'));
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <HomePage />
     </div>
   );
 }
