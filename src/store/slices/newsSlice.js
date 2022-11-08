@@ -4,60 +4,61 @@ const newsSlice = createSlice({
     name: 'news',
     initialState: {
         stories: [],
+        article: null,
         comments: [],
         subComments: [],
-        article: null,
-        storiesLoading: true,
-        commentsLoading: true,
-        articleLoading: true
+        storiesAreLoading: true,
+        articleIsLoading: true,
+        commentsAreLoading: true
     },
     reducers: {
-        loadedStories(state, action) {
-          const dataForStories = action.payload;
-          const dataForStoriesFiltered = dataForStories.filter(el => el !== null);
-          state.stories = dataForStoriesFiltered;
-          state.storiesLoading = false;
+        loadStories(state, action) {
+            const storiesData = action.payload;
+            const filteredStories = storiesData.filter((item) => item !== null);
+            state.stories = filteredStories;
+            state.storiesAreLoading = false;
         },
-        loadedComments(state, action) {
-          state.comments = action.payload;
-          state.commentsLoading = false;
+        loadArticle(state, action) {
+            state.article = action.payload;
+            state.articleIsLoading = false;
         },
-        loadedSubComments(state, action) {
+        loadComments(state, action) {
+            state.comments = action.payload;
+            state.commentsAreLoading = false;
+        },
+        loadSubComments(state, action) {
             state.subComments = [...state.subComments, action.payload];
         },
-        loadedArticle(state, action) {
-          state.article = action.payload;
-          state.articleLoading = false;
-        },
-        deleteNews(state) {
+        resetNews(state) {
             state.stories = [];
-            state.storiesLoading = true;
+            state.storiesAreLoading = true;
         },
-        deleteComments(state) {
-            state.comments = [];
-            state.commentsLoading = true;
-            state.subComments = [];
-        },
-        deleteArticle(state) {
+        resetArticle(state) {
             state.article = null;
             state.comments = [];
             state.subComments = [];
-            state.articleLoading = true;
-            state.commentsLoading = true;
+            state.articleIsLoading = true;
+            state.commentsAreLoading = true;
         },
-        deleteLoading(state, action) {
-            if (action.payload === 'STORIES_LOADING_FAIL') {
-                state.storiesLoading = false;
+        resetComments(state) {
+            state.comments = [];
+            state.subComments = [];
+            state.commentsAreLoading = true;
+        },
+        resetLoadingState(state, action) {
+            if (action.payload === "STORIES_LOADING_FAIL") {
+                state.storiesAreLoading = false;
             }
-            if (action.payload === 'ARTICLE_LOADING_FAIL') {
-                state.articleLoading = false;
+            if (action.payload === "ARTICLE_LOADING_FAIL") {
+                state.articleIsLoading = false;
             }
-            if (action.payload === 'COMMENTS_LOADING_FAIL') {
-                state.commentsLoading = false;
+            if (action.payload === "COMMENTS_LOADING_FAIL") {
+                state.commentsAreLoading = false;
             }
         }
     }
 });
 
 export const newsActions = newsSlice.actions;
+
 export default newsSlice;

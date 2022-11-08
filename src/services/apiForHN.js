@@ -1,5 +1,5 @@
-const url = 'https://hacker-news.firebaseio.com/v0/';
-const newStoriesUrl = `${url}newstories.json?print=pretty`;
+const urlForHN = "https://hacker-news.firebaseio.com/v0/";
+const newStoriesUrl = `${urlForHN}newstories.json?print=pretty`;
 
 const response = (respns) => {
     if (respns.ok) {
@@ -8,10 +8,10 @@ const response = (respns) => {
     return Promise.reject(`Ошибка ${respns.status}`);
 };
 
-export const newStoriesIds = async() => {
-  return fetch(newStoriesUrl).then(response);
+export const getStoriesIds = async () => {
+    return fetch(newStoriesUrl).then(response);
 };
 
-export const data = (id) => {
-    return fetch(`${url}/item/${id}.json`).then(response);
+export const getData = (id) => {
+    return fetch(`${urlForHN}/item/${id}.json`).then(response);
 };

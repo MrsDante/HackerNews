@@ -1,20 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { newsActions } from '../store/slices/newsSlice';
-import Header from '../components/Header';
+import React from "react";
+import Header from "../components/Header/Header";
+import NewsList from "../components/NewsList/NewsList";
+
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+    return (
+        <React.Fragment>
+            <Header />
+            <main>
+               <NewsList />
+            </main>
+        </React.Fragment>
+    );
+};
 
-  useEffect(() => {
-    dispatch(newsActions.deleteArticle());
-  }, [dispatch]);
-
-  return (
-    <>
-      <Header />
-    </>
-  )
-}
-
-export default HomePage
+export default HomePage;
